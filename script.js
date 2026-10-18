@@ -6,16 +6,16 @@ const CONFIG = {
     github: 'https://github.com/JayanOdedra',
     email: 'odedrajayan@gmail.com',
     resume: 'assets/Jayan_Odedra_Resume.pdf',
-    studentRepo: '',   // paste the repository URL
+    studentRepo: 'https://github.com/JayanOdedra/Student-Management-System',   // paste the repository URL
     studentDemo: '',   // optional: add only if a live demo exists
-    phishingRepo: '',  // paste the repository URL
+    phishingRepo: 'https://github.com/JayanOdedra/Phishing-url-system',  // paste the repository URL
     phishingDemo: ''   // optional
   },
   // level: 'hands' = Hands-on, 'found' = Foundations
   skills: [
     ['HTML','Web technologies','hands'],['CSS','Web technologies','hands'],['JavaScript','Web technologies','hands'],['Django','Framework','hands'],
-    ['Flask','Framework','found'],['SQLite','Database','hands'],['MongoDB','Database','found'],['Python','Programming','found'],
-    ['Kali Linux','Operating system','found'],['Nmap','Tool','found'],['Git','Tool','hands'],['GitHub','Tool','hands'],['VS Code','Tool','hands']
+    ['Flask','Framework','found'],['SQLite','Database','hands'],['MongoDB','Database','found'],['Python(basics)','Programming','found'],
+    ['Kali Linux(Basics)','Operating system','found'],['Git','Tool','hands'],['GitHub','Tool','hands'],['VS Code','Tool','hands']
   ]
 };
 
