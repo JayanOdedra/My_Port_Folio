@@ -1,186 +1,181 @@
-/* =========================================================
-   Jayan Odedra portfolio: script.js
-   ========================================================= */
-
-/* >>> CONTACT FORM SETUP <<<
-   1. Create a free form at https://formspree.io
-   2. Copy your form ID (the part after /f/ in the endpoint URL)
-   3. Paste it below in place of YOUR_FORM_ID
-   Until you do, the form falls back to opening your email app. */
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-const CONTACT_EMAIL = 'odedrajayan@gmail.com';
-
-document.documentElement.classList.add('js'); // enables reveal animations only when JS runs
-
-const $ = (s, el = document) => el.querySelector(s);
-const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-const store = {
-  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+'use strict';
+/* ============ CONFIG: edit your content here ============ */
+const CONFIG = {
+  links: {
+    linkedin: 'https://www.linkedin.com/in/jayan-odedra',
+    github: 'https://github.com/JayanOdedra',
+    email: 'odedrajayan@gmail.com',
+    resume: 'assets/Jayan_Odedra_Resume.pdf',
+    studentRepo: '',   // paste the repository URL
+    studentDemo: '',   // optional: add only if a live demo exists
+    phishingRepo: '',  // paste the repository URL
+    phishingDemo: ''   // optional
+  },
+  // level: 'hands' = Hands-on, 'found' = Foundations
+  skills: [
+    ['HTML','Web technologies','hands'],['CSS','Web technologies','hands'],['JavaScript','Web technologies','hands'],['Django','Framework','hands'],
+    ['Flask','Framework','found'],['SQLite','Database','hands'],['MongoDB','Database','found'],['Python','Programming','found'],
+    ['Kali Linux','Operating system','found'],['Nmap','Tool','found'],['Git','Tool','hands'],['GitHub','Tool','hands'],['VS Code','Tool','hands']
+  ]
 };
 
-/* ---------- Theme toggle ---------- */
-const root = document.documentElement;
-const themeBtn = $('#themeToggle');
-function applyTheme(t) {
-  root.setAttribute('data-theme', t);
-  const dark = t === 'dark';
-  themeBtn.innerHTML = `<i class="fa-solid ${dark ? 'fa-sun' : 'fa-moon'}"></i>`;
-  themeBtn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-}
-applyTheme(root.getAttribute('data-theme') || 'light');
-themeBtn.addEventListener('click', () => {
-  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  applyTheme(next);
-  store.set('theme', next);
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+document.documentElement.classList.add('js');
+
+/* Toast for links that are not configured yet */
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3200)}
+
+/* ---------- Build skills and certificate cards ---------- */
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('#skillGrid').innerHTML = CONFIG.skills.map(([n,c,l],i)=>
+  `<article class="card glass reveal spot" style="--d:${(i%4)*.06}s"><p class="skill-cat">${c}</p><h3>${esc(n)}</h3><span class="lvl ${l}">${l==='hands'?'Hands-on':'Foundations'}</span></article>`).join('');
+
+/* ---------- Wire up links from CONFIG ---------- */
+$$('[data-link]').forEach(el=>{
+  const key=el.dataset.link, val=CONFIG.links[key];
+  if(key==='email'){
+    el.href=`mailto:${val}`;$('#mailLine').textContent=val;return;
+  }
+  if(val){el.href=val;return}
+  if(el.hasAttribute('data-optional')){el.hidden=true;return}   // no demo link = no demo button
+  el.setAttribute('aria-disabled','true');el.setAttribute('role','link');
+  el.title='Not added yet. Set it in CONFIG in script.js';
+  el.addEventListener('click',e=>{e.preventDefault();toast(`"${el.textContent.trim()}" link is not set yet. Add it in CONFIG inside script.js.`)});
 });
-// Follow system changes only if the user never chose manually
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-  if (!store.get('theme')) applyTheme(e.matches ? 'dark' : 'light');
-});
+$('#year').textContent = new Date().getFullYear();
 
-/* ---------- Mobile menu ---------- */
-const burger = $('#burger');
-const links = $('#navLinks');
-function setMenu(open) {
-  links.classList.toggle('open', open);
-  burger.setAttribute('aria-expanded', open);
-  burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  burger.innerHTML = `<i class="fa-solid ${open ? 'fa-xmark' : 'fa-bars'}"></i>`;
-}
-burger.addEventListener('click', () => setMenu(!links.classList.contains('open')));
-links.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+/* ---------- Preloader (about 2.4s) ---------- */
+(async function preloader(){
+  const log=$('#preLog'),fill=$('#preFill'),pct=$('#prePct');
+  const steps=['INITIALIZING PORTFOLIO...','LOADING SECURITY MODULES...','SYSTEM READY'];
+  const gap = reduced?0:650;
+  for(let i=0;i<steps.length;i++){
+    log.textContent += (i?'\n':'')+'> '+steps[i];
+    const to=Math.round((i+1)/steps.length*100);
+    fill.style.transition=`width ${gap||1}ms linear`;fill.style.width=to+'%';pct.textContent=to+'%';
+    await sleep(gap);
+  }
+  await sleep(reduced?0:300);
+  $('#preloader').classList.add('done');
+  document.body.classList.remove('is-loading');
+  startHero();
+})();
 
-/* ---------- Active link highlight (scroll spy) ---------- */
-const navAnchors = $$('.nav__links a');
-const spy = new IntersectionObserver(entries => {
-  entries.forEach(en => {
-    if (en.isIntersecting) {
-      navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
-    }
-  });
-}, { rootMargin: '-45% 0px -50% 0px' });
-$$('main section[id]').forEach(s => spy.observe(s));
+/* ---------- Hero: typewriter, glitch, terminal panel ---------- */
+let heroStarted=false;
+function startHero(){
+  if(heroStarted)return;heroStarted=true;
+  const words=['Full Stack Web Developer','Django Developer','Cyber Security Enthusiast'];
+  const out=$('#typed');
+  if(reduced){out.textContent=words[0]}else{
+    (async()=>{let w=0;for(;;){
+      const word=words[w];
+      for(let i=1;i<=word.length;i++){out.textContent=word.slice(0,i);await sleep(70)}
+      await sleep(1400);
+      for(let i=word.length;i>=0;i--){out.textContent=word.slice(0,i);await sleep(35)}
+      await sleep(350);w=(w+1)%words.length;
+    }})();
+  }
+  // Glitch: add .on briefly every few seconds (CSS handles the effect)
+  const h1=$('.glitch');
+  if(!reduced)setInterval(()=>{h1.classList.add('on');setTimeout(()=>h1.classList.remove('on'),380)},4500);
 
-/* ---------- Scroll reveal ---------- */
-const revealIO = new IntersectionObserver((entries, obs) => {
-  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); obs.unobserve(en.target); } });
-}, { threshold: 0.12 });
-$$('.reveal').forEach(el => revealIO.observe(el));
-
-/* ---------- Typing animation ---------- */
-const roles = ['Full Stack Web Developer', 'Django Developer', 'Cyber Security Enthusiast'];
-const typed = $('#typed');
-if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  typed.textContent = roles[0];
-} else {
-  let r = 0, c = 0, del = false;
-  (function tick() {
-    const word = roles[r];
-    typed.textContent = word.slice(0, c);
-    let wait = del ? 40 : 85;
-    if (!del && c === word.length) { del = true; wait = 1400; }
-    else if (del && c === 0) { del = false; r = (r + 1) % roles.length; wait = 350; }
-    else c += del ? -1 : 1;
-    setTimeout(tick, wait);
+  // Decorative terminal: fake status lines only, nothing is executed
+  const lines=['$ whoami','<span class="ok">jayan_odedra</span>','$ status --learning','<b>[ok]</b> frontend ........... active','<b>[ok]</b> backend (django) .... active','<b>[ok]</b> databases ........... active','$ stack','html css js django mongodb sqlite','$ goal','<span class="ok">full stack developer</span>'];
+  const body=$('#termBody');
+  (async()=>{
+    for(const l of lines){body.innerHTML+=l+'\n';body.scrollTop=body.scrollHeight;await sleep(reduced?0:420)}
+    body.innerHTML+='$ <span class="cursor"></span>';body.scrollTop=body.scrollHeight;
   })();
 }
 
-/* ---------- Profile photo fallback ("JO") ---------- */
-const img = $('#profileImg');
-const avatar = $('.avatar');
-const showFallback = () => avatar.classList.add('no-img');
-img.addEventListener('error', showFallback);
-if (img.complete && img.naturalWidth === 0) showFallback();
+/* ---------- Scroll reveal + counters (IntersectionObserver) ---------- */
+function countUp(el){
+  const to=+el.dataset.to;
+  if(reduced){el.textContent=to;return}
+  const dur=1400,t0=performance.now();
+  (function tick(t){const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(to*e);if(p<1)requestAnimationFrame(tick)})(t0);
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  e.target.classList.add('in');
+  $$('.count',e.target).forEach(countUp);
+  io.unobserve(e.target);
+}),{threshold:.15});
+$$('.reveal').forEach(el=>io.observe(el));
 
-/* ---------- Resume modal ---------- */
-const modal = $('#resumeModal');
-const frame = $('#resumeFrame');
-const PDF = 'assets/Jayan_Odedra_Resume.pdf';
-let lastFocus = null;
-function openModal() {
-  lastFocus = document.activeElement;
-  frame.src = PDF;                 // load only when opened
-  modal.hidden = false;
-  document.body.style.overflow = 'hidden';
-  $('#modalClose').focus();
+/* ---------- Card spotlight follows the cursor ---------- */
+document.addEventListener('pointermove',e=>{
+  const c=e.target.closest&&e.target.closest('.spot');if(!c)return;
+  const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px');
+},{passive:true});
+
+/* ---------- Nav: scrolled state, progress bar, active section ---------- */
+const nav=$('#nav'),bar=$('#scrollProgress'),links=$$('.menu a'),ind=$('#indicator');
+const sections=links.map(a=>$(a.getAttribute('href')));
+function moveIndicator(a){
+  if(!a||innerWidth<=900)return;
+  ind.style.width=a.offsetWidth+'px';ind.style.transform=`translateX(${a.offsetLeft}px)`;
 }
-function closeModal() {
-  modal.hidden = true;
-  frame.src = 'about:blank';
-  document.body.style.overflow = '';
-  if (lastFocus) lastFocus.focus();
+function onScroll(){
+  nav.classList.toggle('scrolled',scrollY>30);
+  const max=document.documentElement.scrollHeight-innerHeight;
+  bar.style.transform=`scaleX(${max>0?scrollY/max:0})`;
+  let cur=0;const y=scrollY+innerHeight*.35;
+  sections.forEach((s,i)=>{if(s.offsetTop<=y)cur=i});
+  if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=sections.length-1;
+  links.forEach((a,i)=>{a.classList.toggle('active',i===cur);if(i===cur)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+  moveIndicator(links[cur]);
 }
-$$('[data-open-resume]').forEach(b => b.addEventListener('click', openModal));
-$('#modalClose').addEventListener('click', closeModal);
-modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => {
-  if (modal.hidden) return;
-  if (e.key === 'Escape') closeModal();
-  if (e.key === 'Tab') { // keep focus inside the dialog
-    const f = $$('a[href], button', modal);
-    const first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+let ticking=false;
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{onScroll();ticking=false})}},{passive:true});
+addEventListener('resize',onScroll);
+onScroll();document.fonts&&document.fonts.ready.then(onScroll);
+
+/* ---------- Mobile menu ---------- */
+const burger=$('#burger'),menu=$('#menu');
+function setMenu(open){menu.classList.toggle('open',open);burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Close menu':'Open menu')}
+burger.addEventListener('click',()=>setMenu(!menu.classList.contains('open')));
+links.forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+addEventListener('resize',()=>{if(innerWidth>900)setMenu(false)});
+
+/* ---------- Background: lightweight particles on canvas ---------- */
+(function particles(){
+  const cv=$('#bg'),ctx=cv.getContext('2d');
+  let W,H,P=[],raf,visible=true;
+  const dpr=Math.min(devicePixelRatio||1,2);
+  function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    const n=Math.min(48,Math.floor(W*H/32000));
+    P=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:-.1-Math.random()*.3,r:1+Math.random()*1.6,c:Math.random()>.5?'0,255,157':'34,211,238'}))}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of P){
+      if(!reduced){p.x+=p.vx;p.y+=p.vy;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}if(p.x<-5)p.x=W+5;if(p.x>W+5)p.x=-5}
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fillStyle=`rgba(${p.c},.55)`;ctx.shadowBlur=8;ctx.shadowColor=`rgb(${p.c})`;ctx.fill();
+    }
+    if(!reduced&&visible)raf=requestAnimationFrame(draw);
   }
+  size();draw();addEventListener('resize',()=>{size();if(reduced)draw()});
+  // Pause the loop when the tab is hidden to save CPU
+  document.addEventListener('visibilitychange',()=>{visible=!document.hidden;cancelAnimationFrame(raf);if(visible&&!reduced)draw()});
+})();
+
+/* ---------- Profile photo: show a labelled placeholder if assets/profile.jpg is missing ---------- */
+(function profilePhoto(){
+  const img=$('#profilePhoto'),fig=img.closest('.hero-photo');
+  const miss=()=>fig.classList.add('no-photo');
+  img.addEventListener('error',miss);
+  if(img.complete&&img.naturalWidth===0)miss();
+})();
+
+/* ---------- Project screenshots: use the image if the file exists, else keep the placeholder ---------- */
+$$('[data-shot]').forEach(box=>{
+  const im=new Image();
+  im.onload=()=>{box.removeAttribute('role');box.removeAttribute('aria-label');box.innerHTML='';im.alt=box.closest('.card').querySelector('h3').textContent+' project screenshot';im.decoding='async';box.appendChild(im)};
+  im.src=box.dataset.shot;
 });
-
-/* ---------- Contact form ---------- */
-const form = $('#contactForm');
-const status = $('#formStatus');
-const rules = {
-  name: v => v.trim().length >= 2 || 'Enter your name (at least 2 characters).',
-  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || 'Enter a valid email address.',
-  message: v => v.trim().length >= 10 || 'Write a message of at least 10 characters.'
-};
-function check(name) {
-  const input = form.elements[name];
-  const res = rules[name](input.value);
-  const ok = res === true;
-  input.closest('.field').classList.toggle('invalid', !ok);
-  input.setAttribute('aria-invalid', !ok);
-  $('#' + name + 'Err').textContent = ok ? '' : res;
-  return ok;
-}
-Object.keys(rules).forEach(n => form.elements[n].addEventListener('blur', () => check(n)));
-
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-  status.className = 'form__status';
-  status.textContent = '';
-  const valid = Object.keys(rules).map(check).every(Boolean);
-  if (!valid) return;
-
-  // Fallback until a Formspree ID is added: open the visitor's email app
-  if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
-    const { name, email, message } = form.elements;
-    const body = `${message.value}\n\nFrom: ${name.value} (${email.value})`;
-    location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Portfolio message from ' + name.value)}&body=${encodeURIComponent(body)}`;
-    return;
-  }
-
-  const btn = $('button[type="submit"]', form);
-  btn.disabled = true;
-  try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: { Accept: 'application/json' },
-      body: new FormData(form)
-    });
-    if (!res.ok) throw new Error('Request failed');
-    form.reset();
-    status.textContent = 'Message sent. Thank you, I will reply soon.';
-    status.classList.add('ok');
-  } catch (err) {
-    status.textContent = 'Could not send the message. Please email me directly at ' + CONTACT_EMAIL + '.';
-    status.classList.add('bad');
-  } finally {
-    btn.disabled = false;
-  }
-});
-
-/* ---------- Back to top + footer year ---------- */
-const toTop = $('#toTop');
-addEventListener('scroll', () => toTop.classList.toggle('show', scrollY > 600), { passive: true });
-toTop.addEventListener('click', () => scrollTo({ top: 0 }));
-$('#year').textContent = new Date().getFullYear();

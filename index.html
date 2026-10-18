@@ -1,280 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jayan Odedra | Full Stack Web Developer</title>
-  <meta name="description" content="Portfolio of Jayan Odedra, a Computer Engineering student and Full Stack Web Developer working with Django, Flask, JavaScript, MongoDB and SQLite.">
-  <meta name="author" content="Jayan Odedra">
-  <meta name="theme-color" content="#3730a3">
-  <!-- Open Graph (link previews) -->
-  <meta property="og:title" content="Jayan Odedra | Full Stack Web Developer">
-  <meta property="og:description" content="Django, Flask, JavaScript and cyber security projects by Jayan Odedra.">
-  <meta property="og:type" content="website">
-  <!-- Favicon: inline SVG with initials, no extra file needed -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233730a3'/%3E%3Ctext x='32' y='42' font-size='28' font-family='Arial' font-weight='700' text-anchor='middle' fill='%232dd4bf'%3EJO%3C/text%3E%3C/svg%3E">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Apply saved/system theme before paint to avoid a flash -->
-  <script>
-    (function () {
-      var t = null;
-      try { t = localStorage.getItem('theme'); } catch (e) {}
-      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jayan Odedra | Full Stack Web Developer</title>
+<meta name="description" content="Portfolio of Jayan Odedra, a Computer Engineering student and Full Stack Web Developer working with Django, JavaScript, MongoDB and SQLite.">
+<meta name="theme-color" content="#060b16">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <a class="skip" href="#home">Skip to content</a>
+<body class="is-loading">
 
-  <!-- ===== NAVBAR ===== -->
-  <header class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="#home" class="logo" aria-label="Jayan Odedra, home">JO<span>.</span></a>
-      <nav aria-label="Main">
-        <ul class="nav__links" id="navLinks">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#resume">Resume</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="nav__actions">
-        <button class="icon-btn" id="themeToggle" aria-label="Switch to dark mode"><i class="fa-solid fa-moon"></i></button>
-        <button class="icon-btn burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><i class="fa-solid fa-bars"></i></button>
-      </div>
-    </div>
-  </header>
+<!-- PRELOADER -->
+<div class="preloader" id="preloader" role="status" aria-live="polite">
+  <div class="pre-box">
+    <pre class="pre-log" id="preLog"></pre>
+    <div class="pre-bar"><span id="preFill"></span></div>
+    <div class="pre-pct" id="prePct">0%</div>
+  </div>
+</div>
 
-  <main>
-    <!-- ===== HERO ===== -->
-    <section id="home" class="hero">
-      <div class="container hero__inner">
-        <div class="hero__text">
-          <p class="hero__hi">Hi, I'm</p>
-          <h1>Jayan Odedra</h1>
-          <p class="hero__role">I'm a <span id="typed" aria-live="off"></span><span class="caret" aria-hidden="true"></span></p>
-          <p class="hero__sub">Computer Engineering student building scalable, user-focused web applications.</p>
-          <div class="btn-row">
-            <button class="btn btn--primary" data-open-resume><i class="fa-regular fa-eye"></i> View Resume</button>
-            <a class="btn btn--ghost" href="assets/Jayan_Odedra_Resume.pdf" download="Jayan_Odedra_Resume.pdf"><i class="fa-solid fa-download"></i> Download Resume</a>
-            <a class="btn btn--ghost" href="#contact"><i class="fa-regular fa-envelope"></i> Contact Me</a>
-          </div>
-        </div>
-        <div class="hero__photo">
-          <div class="avatar">
-            <!-- If images/profile.jpg is missing, script.js shows the "JO" placeholder -->
-            <img src="images/profile.jpg" alt="Portrait of Jayan Odedra" id="profileImg" width="320" height="320">
-            <span class="avatar__fallback" id="avatarFallback" aria-hidden="true">JO</span>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="progress" id="scrollProgress" aria-hidden="true"></div>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="grid-bg" aria-hidden="true"></div>
 
-    <!-- ===== ABOUT ===== -->
-    <section id="about" class="section">
-      <div class="container narrow reveal">
-        <h2>About me</h2>
-        <p class="lead">Motivated Computer Engineering student seeking a Full Stack Web Development opportunity to apply skills in frontend and backend development, database management, and web technologies. Eager to build scalable, user-focused applications while continuously improving technical and problem-solving skills.</p>
-        <p class="langs"><i class="fa-solid fa-language" aria-hidden="true"></i> Languages: English, Hindi, Gujarati</p>
-      </div>
-    </section>
+<!-- NAVIGATION -->
+<header class="nav" id="nav">
+  <a href="#home" class="logo" aria-label="Jayan Odedra home">JAYAN<span>_</span></a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+  <nav class="menu" id="menu" aria-label="Main">
+    <span class="indicator" id="indicator" aria-hidden="true"></span>
+    <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a>
+    <a href="#projects">Projects</a><a href="#experience">Experience</a>
+    <a href="#education">Education</a><a href="#contact">Contact</a>
+  </nav>
+</header>
 
-    <!-- ===== SKILLS ===== -->
-    <section id="skills" class="section section--alt">
-      <div class="container">
-        <h2 class="reveal">Skills</h2>
-        <div class="grid grid--3">
-          <article class="card reveal">
-            <h3><i class="fa-solid fa-globe" aria-hidden="true"></i> Web technologies</h3>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-          </article>
-          <article class="card reveal">
-            <h3><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Framework</h3>
-            <ul class="tags"><li>Django</li></ul>
-          </article>
-          <article class="card reveal">
-            <h3><i class="fa-solid fa-database" aria-hidden="true"></i> Databases</h3>
-            <ul class="tags"><li>MongoDB</li><li>SQLite</li></ul>
-          </article>
-          <article class="card reveal">
-            <h3><i class="fa-brands fa-python" aria-hidden="true"></i> Programming</h3>
-            <ul class="tags"><li>Python (Basic)</li></ul>
-          </article>
-          <article class="card reveal">
-            <h3><i class="fa-brands fa-linux" aria-hidden="true"></i> Operating system</h3>
-            <ul class="tags"><li>Kali Linux (Basic)</li></ul>
-          </article>
-          <article class="card reveal">
-            <h3><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Tools</h3>
-            <ul class="tags"><li>Git</li><li>GitHub</li><li>VS Code</li></ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== EXPERIENCE ===== -->
-    <section id="experience" class="section">
-      <div class="container narrow">
-        <h2 class="reveal">Experience</h2>
-        <ol class="timeline">
-          <li class="timeline__item reveal">
-            <h3>Cisco Networking Intern, Cyber Security Essentials</h3>
-            <p class="meta">01 July 2026 to 15 July 2026</p>
-            <ul>
-              <li>Assisted in vulnerability assessment, security analysis and threat identification using Nmap and Kali Linux.</li>
-              <li>Analyzed phishing URLs and suspicious security indicators to identify potential threats.</li>
-              <li>Gained practical exposure to network security, threat detection and incident analysis.</li>
-              <li>Applied cybersecurity best practices during security analysis and testing.</li>
-            </ul>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ===== PROJECTS ===== -->
-    <section id="projects" class="section section--alt">
-      <div class="container">
-        <h2 class="reveal">Projects</h2>
-        <div class="grid grid--2">
-          <article class="card project reveal">
-            <h3>Student Management System</h3>
-            <ul class="badges" aria-label="Tech stack"><li>Python</li><li>Django</li><li>SQLite</li><li>HTML</li><li>CSS</li><li>Bootstrap</li></ul>
-            <ul class="bullets">
-              <li>Web-based system built with Django.</li>
-              <li>CRUD operations for student records.</li>
-              <li>SQLite integration for data storage and retrieval.</li>
-              <li>Simple, user-friendly interface using HTML, CSS and Bootstrap.</li>
-            </ul>
-            <!-- TODO: replace with the exact repository URL -->
-            <a class="btn btn--ghost btn--sm" href="https://github.com/JayanOdedra" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View on GitHub</a>
-          </article>
-          <article class="card project reveal">
-            <h3>Phishing URL System</h3>
-            <ul class="badges" aria-label="Tech stack"><li>Python</li><li>Flask</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            <ul class="bullets">
-              <li>Flask backend that processes URL inputs and gives automated classification results.</li>
-              <li>Extracts and analyzes URL-based security features to separate legitimate URLs from malicious ones.</li>
-              <li>Responsive web interface to submit URLs and view detection results.</li>
-            </ul>
-            <!-- TODO: replace with the exact repository URL -->
-            <a class="btn btn--ghost btn--sm" href="https://github.com/JayanOdedra" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View on GitHub</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== EDUCATION ===== -->
-    <section id="education" class="section">
-      <div class="container narrow">
-        <h2 class="reveal">Education</h2>
-        <ol class="timeline">
-          <li class="timeline__item reveal">
-            <h3>B.E. Computer Engineering</h3>
-            <p class="meta">Government Engineering College Palanpur, 2023-2027</p>
-            <p>CGPA: 6.57</p>
-          </li>
-          <li class="timeline__item reveal">
-            <h3>HSC</h3>
-            <p class="meta">Rajshakha Higher Secondary School, Gujarat Board, 2023</p>
-            <p>70.72%</p>
-          </li>
-          <li class="timeline__item reveal">
-            <h3>SSC</h3>
-            <p class="meta">Rajshakha Higher Secondary School, Gujarat Board, 2021</p>
-            <p>76.33%</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ===== RESUME ===== -->
-    <section id="resume" class="section section--alt">
-      <div class="container narrow center reveal">
-        <h2>Resume</h2>
-        <p class="lead">Read it here or save a copy.</p>
-        <div class="btn-row btn-row--center">
-          <button class="btn btn--primary" data-open-resume><i class="fa-regular fa-eye"></i> View Resume</button>
-          <a class="btn btn--ghost" href="assets/Jayan_Odedra_Resume.pdf" download="Jayan_Odedra_Resume.pdf"><i class="fa-solid fa-download"></i> Download Resume</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CONTACT ===== -->
-    <section id="contact" class="section">
-      <div class="container">
-        <h2 class="reveal">Contact</h2>
-        <div class="contact">
-          <ul class="contact__list reveal">
-            <li><a href="mailto:odedrajayan@gmail.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> odedrajayan@gmail.com</a></li>
-            <li><a href="tel:+919998869392"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91-9998869392</a></li>
-            <li><a href="https://linkedin.com/in/jayan-odedra" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> linkedin.com/in/jayan-odedra</a></li>
-            <li><a href="https://github.com/JayanOdedra" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> github.com/JayanOdedra</a></li>
-          </ul>
-
-          <!-- Replace YOUR_FORM_ID with your Formspree form ID (see script.js) -->
-          <form class="card form reveal" id="contactForm" novalidate>
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required>
-              <p class="err" id="nameErr" role="alert"></p>
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required>
-              <p class="err" id="emailErr" role="alert"></p>
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-              <p class="err" id="messageErr" role="alert"></p>
-            </div>
-            <button class="btn btn--primary" type="submit">Send message</button>
-            <p class="form__status" id="formStatus" role="status"></p>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>&copy; <span id="year"></span> Jayan Odedra. All rights reserved.</p>
-      <ul class="social">
-        <li><a href="https://github.com/JayanOdedra" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
-        <li><a href="https://linkedin.com/in/jayan-odedra" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
-        <li><a href="mailto:odedrajayan@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a></li>
-        <li><a href="tel:+919998869392" aria-label="Phone"><i class="fa-solid fa-phone"></i></a></li>
-      </ul>
-    </div>
-  </footer>
-
-  <button class="to-top" id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-
-  <!-- ===== RESUME MODAL ===== -->
-  <div class="modal" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
-    <div class="modal__box">
-      <div class="modal__bar">
-        <h2 id="modalTitle">Resume</h2>
-        <a href="assets/Jayan_Odedra_Resume.pdf" target="_blank" rel="noopener">Open in new tab</a>
-        <button class="icon-btn" id="modalClose" aria-label="Close resume"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <iframe id="resumeFrame" title="Jayan Odedra resume (PDF)"></iframe>
-      <p class="modal__note">Can't see the preview? <a href="assets/Jayan_Odedra_Resume.pdf" target="_blank" rel="noopener">Open in new tab</a>.</p>
+<main>
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-main">
+  <div class="hero-text">
+    <p class="status"><span class="dot"></span>Open to Full Stack opportunities</p>
+    <p class="hello">Hi, I'm Jayan Odedra</p>
+    <h1 class="glitch" data-text="Full Stack Web Developer">Full Stack Web Developer</h1>
+    <p class="typer"><span class="prompt">&gt;</span> <span id="typed"></span><span class="cursor" aria-hidden="true"></span></p>
+    <p class="lead">Computer Engineering student building scalable, user-focused web applications. I work across frontend, backend and databases, and keep improving my technical and problem-solving skills.</p>
+    <div class="actions">
+      <a href="#projects" class="btn btn-primary">Explore My Work</a>
+      <a href="#contact" class="btn btn-ghost">Contact Me</a>
     </div>
   </div>
+  <aside class="term glass" aria-label="Decorative system status panel">
+    <div class="term-head"><i></i><i></i><i></i><span>jayan@portfolio: ~</span></div>
+    <pre class="term-body" id="termBody" aria-hidden="true"></pre>
+    <p class="sr-only">Decorative panel showing simulated status messages. No commands are executed.</p>
+  </aside>
+  </div>
+  <figure class="hero-photo">
+    <div class="photo-ring">
+      <div class="photo-frame">
+        <img id="profilePhoto" src="images/profile.jpeg" alt="Jayan Odedra - Full Stack Web Developer" width="340" height="340" decoding="async">
+        <figcaption class="photo-ph">Add your photo<br><small>assets/profile.jpg</small></figcaption>
+      </div>
+    </div>
+  </figure>
+  <a href="#about" class="scroll-ind" aria-label="Scroll to About"><span></span></a>
+</section>
 
-  <script src="script.js"></script>
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <h2 class="reveal">About me</h2>
+  <div class="split">
+    <div class="reveal">
+      <p>I'm pursuing a B.E. in Computer Engineering at Government Engineering College, Palanpur (2023-2027).</p>
+      <p>I'm seeking a Full Stack Web Development opportunity where I can apply my skills in frontend and backend development, database management and web technologies, and build scalable, user-focused applications.</p>
+      <p>In July 2026 I completed a Cisco Cyber Security Essentials internship, using Nmap and Kali Linux for security analysis and phishing URL detection.</p>
+      <ul class="chips"><li>Frontend</li><li>Backend</li><li>Databases</li><li>Cyber security basics</li></ul>
+    </div>
+    <div class="term glass reveal" aria-hidden="true">
+      <div class="term-head"><i></i><i></i><i></i><span>profile.json</span></div>
+<pre class="term-body">{
+  <b>"name"</b>     : Jayan Odedra
+  <b>"degree"</b>   : B.E. Computer Engineering
+  <b>"college"</b>  : GEC Palanpur
+  <b>"stack"</b>    : HTML, CSS, JS, Django
+  <b>"database"</b> : MongoDB, SQLite
+  <b>"languages"</b>: English, Hindi, Gujarati
+  <b>"goal"</b>     : Full Stack Web Developer
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sec">
+  <h2 class="reveal">Skills and tools</h2>
+  <p class="sub reveal">Levels are honest self-assessments: <b>Foundations</b> means I understand the basics, <b>Hands-on</b> means I use it regularly in labs or projects.</p>
+  <div class="cards" id="skillGrid"></div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec">
+  <h2 class="reveal">Projects</h2>
+  <div class="cards two">
+    <article class="card glass reveal spot">
+      <span class="tag-type dev-tag">Web development</span>
+      <div class="shot" data-shot="assets/student-management.png" role="img" aria-label="Screenshot placeholder for Student Management System"><span>Screenshot placeholder<br><small>assets/student-management.png</small></span></div>
+      <h3>Student Management System</h3>
+      <p>A web-based system built with Django. It supports CRUD operations for student records, stores data in SQLite, and has a simple, user-friendly interface built with HTML, CSS and Bootstrap.</p>
+      <ul class="badges"><li>Python</li><li>Django</li><li>SQLite</li><li>HTML</li><li>CSS</li><li>Bootstrap</li></ul>
+      <div class="card-actions"><a class="btn btn-ghost sm" data-link="studentRepo" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost sm" data-link="studentDemo" target="_blank" rel="noopener" data-optional>Live demo</a></div>
+    </article>
+    <article class="card glass reveal spot">
+      <span class="tag-type sec-tag">Security</span>
+      <div class="shot" data-shot="assets/phishing-url.png" role="img" aria-label="Screenshot placeholder for Phishing URL System"><span>Screenshot placeholder<br><small>assets/phishing-url.png</small></span></div>
+      <h3>Phishing URL System</h3>
+      <p>A Flask backend that processes URL inputs and gives automated classification results. It extracts URL-based security features to tell legitimate URLs from malicious ones, with a responsive interface to submit URLs and view the results.</p>
+      <ul class="badges"><li>Python</li><li>Flask</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+      <div class="card-actions"><a class="btn btn-ghost sm" data-link="phishingRepo" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost sm" data-link="phishingDemo" target="_blank" rel="noopener" data-optional>Live demo</a></div>
+    </article>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="sec">
+  <h2 class="reveal">Experience</h2>
+  <p class="sub reveal"><b>Cisco Networking Intern</b>, Cyber Security Essentials. 01 July 2026 to 15 July 2026.</p>
+  <div class="cards two">
+    <article class="card glass reveal spot"><p class="skill-cat">Security analysis</p><h3>Vulnerability assessment</h3><p>Assisted in vulnerability assessment, security analysis and threat identification using Nmap and Kali Linux.</p></article>
+    <article class="card glass reveal spot"><p class="skill-cat">Phishing</p><h3>Phishing URL analysis</h3><p>Analyzed phishing URLs and suspicious security indicators to identify potential threats.</p></article>
+    <article class="card glass reveal spot"><p class="skill-cat">Networking</p><h3>Network security</h3><p>Gained practical exposure to network security, threat detection and incident analysis.</p></article>
+    <article class="card glass reveal spot"><p class="skill-cat">Practice</p><h3>Security best practices</h3><p>Applied cybersecurity best practices during security analysis and testing.</p></article>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="sec">
+  <h2 class="reveal">Education</h2>
+  <div class="cards three">
+    <article class="card glass reveal spot"><p class="skill-cat">2023-2027</p><h3>B.E. Computer Engineering</h3><p>Government Engineering College Palanpur</p><span class="lvl hands">CGPA 6.57</span></article>
+    <article class="card glass reveal spot"><p class="skill-cat">2023</p><h3>HSC</h3><p>Rajshakha Higher Secondary School, Gujarat Board</p><span class="lvl hands">70.72%</span></article>
+    <article class="card glass reveal spot"><p class="skill-cat">2021</p><h3>SSC</h3><p>Rajshakha Higher Secondary School, Gujarat Board</p><span class="lvl hands">76.33%</span></article>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec contact">
+  <div class="glass contact-box reveal">
+    <h2>Let's talk</h2>
+    <p>I'm open to Full Stack Web Development opportunities, internships and conversations about building web applications. Send me a message and I'll reply as soon as I can.</p>
+    <div class="actions center">
+      <a class="btn btn-primary" id="mailBtn" data-link="email">Email me</a>
+      <a class="btn btn-ghost" data-link="linkedin" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" data-link="github" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" data-link="resume" download>Download resume</a>
+    </div>
+    <p class="mail-line" id="mailLine"></p>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><p>&copy; <span id="year"></span> Jayan Odedra. Built with HTML, CSS and JavaScript.</p></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
 </body>
 </html>
