@@ -1,344 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jayan Odedra | Full Stack Web Developer</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="theme.css" />
-  <script src="theme.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="description" content="Portfolio of Jayan Odedra, a Computer Engineering student and Full Stack Web Developer working with Django, Flask, JavaScript, MongoDB and SQLite.">
+  <meta name="author" content="Jayan Odedra">
+  <meta name="theme-color" content="#3730a3">
+  <!-- Open Graph (link previews) -->
+  <meta property="og:title" content="Jayan Odedra | Full Stack Web Developer">
+  <meta property="og:description" content="Django, Flask, JavaScript and cyber security projects by Jayan Odedra.">
+  <meta property="og:type" content="website">
+  <!-- Favicon: inline SVG with initials, no extra file needed -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233730a3'/%3E%3Ctext x='32' y='42' font-size='28' font-family='Arial' font-weight='700' text-anchor='middle' fill='%232dd4bf'%3EJO%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Apply saved/system theme before paint to avoid a flash -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body>
+  <a class="skip" href="#home">Skip to content</a>
 
-  <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#home" class="nav-logo">Jayan<span>.</span></a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#services" class="nav-link">Services</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#resume" class="nav-link">Resume</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-      <button class="theme-toggle" id="themeToggle" type="button">
-        <i class="fas fa-moon icon-moon"></i><i class="fas fa-sun icon-sun"></i>
-      </button>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <p class="hero-greeting">Hello, It's Me</p>
-      <h1 class="hero-name">Jayan Odedra</h1>
-      <p class="hero-title">And I'm a <span class="typed-text" id="typedText"></span><span class="cursor-blink">|</span></p>
-      <p class="hero-desc">I am a motivated Computer Engineering student interested in Full Stack Web Development, database management, and modern web technologies. I enjoy building user-focused applications and continuously improving my technical and problem-solving skills through practical projects.</p>
-      <div class="hero-buttons">
-        <a href="#contact" class="btn btn-primary">Hire Me</a>
-        <a href="#projects" class="btn btn-outline">View My Work</a>
-      </div>
-      <div class="hero-socials">
-        <a href="https://github.com/JayanOdedra" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/jayan-odedra/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:odedrajayan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+  <!-- ===== NAVBAR ===== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#home" class="logo" aria-label="Jayan Odedra, home">JO<span>.</span></a>
+      <nav aria-label="Main">
+        <ul class="nav__links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#resume">Resume</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Switch to dark mode"><i class="fa-solid fa-moon"></i></button>
+        <button class="icon-btn burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>
-    <div class="hero-image">
-      <div class="img-wrapper">
-        <img src="images/profile.jpeg" alt="Jayan Odedra" id="profileImg" />
-      </div>
-    </div>
-  </section>
+  </header>
 
-  <!-- ABOUT -->
-  <section class="section" id="about">
-    <div class="container">
-      <h2 class="section-title">About <span>Me</span></h2>
-      <div class="about-grid">
-        <div class="about-img-wrap">
-          <img src="images/profile 1.jpeg" alt="Jayan Odedra" />
-        </div>
-        <div class="about-text">
-          <h3>Full Stack Web Developer</h3>
-          <p>I'm a Computer Engineering student at Government Engineering College, Palanpur (GTU), passionate about Full Stack Web Development and building practical, user-focused web applications.</p>
-          <p>My technical interests span frontend and backend development, database management with MongoDB and SQLite, and I have introductory exposure to cybersecurity through a Cisco networking internship.</p>
-          <p>I continuously sharpen my problem-solving skills through hands-on projects and enjoy turning ideas into clean, functional software.</p>
-          <div class="about-info">
-            <div class="info-item"><span class="info-label">Name:</span> Jayan Odedra</div>
-            <div class="info-item"><span class="info-label">Email:</span> <a href="mailto:odedrajayan@gmail.com">odedrajayan@gmail.com</a></div>
-            <div class="info-item"><span class="info-label">Phone:</span> <a href="tel:+919998869392">+91-9998869392</a></div>
-            <div class="info-item"><span class="info-label">Location:</span> India</div>
+  <main>
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="hero__hi">Hi, I'm</p>
+          <h1>Jayan Odedra</h1>
+          <p class="hero__role">I'm a <span id="typed" aria-live="off"></span><span class="caret" aria-hidden="true"></span></p>
+          <p class="hero__sub">Computer Engineering student building scalable, user-focused web applications.</p>
+          <div class="btn-row">
+            <button class="btn btn--primary" data-open-resume><i class="fa-regular fa-eye"></i> View Resume</button>
+            <a class="btn btn--ghost" href="assets/Jayan_Odedra_Resume.pdf" download="Jayan_Odedra_Resume.pdf"><i class="fa-solid fa-download"></i> Download Resume</a>
+            <a class="btn btn--ghost" href="#contact"><i class="fa-regular fa-envelope"></i> Contact Me</a>
           </div>
-          <a href="#contact" class="btn btn-primary" style="margin-top:1.5rem;">Let's Talk</a>
+        </div>
+        <div class="hero__photo">
+          <div class="avatar">
+            <!-- If images/profile.jpg is missing, script.js shows the "JO" placeholder -->
+            <img src="images/profile.jpg" alt="Portrait of Jayan Odedra" id="profileImg" width="320" height="320">
+            <span class="avatar__fallback" id="avatarFallback" aria-hidden="true">JO</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- SKILLS -->
-      <h3 class="skills-heading">My <span>Skills</span></h3>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h4><i class="fas fa-code"></i> Frontend</h4>
-          <div class="skill-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-        </div>
-        <div class="skill-category">
-          <h4><i class="fas fa-terminal"></i> Programming</h4>
-          <div class="skill-tags"><span>Python (Basic)</span></div>
-        </div>
-        <div class="skill-category">
-          <h4><i class="fas fa-layer-group"></i> Framework</h4>
-          <div class="skill-tags"><span>Django</span></div>
-        </div>
-        <div class="skill-category">
-          <h4><i class="fas fa-database"></i> Databases</h4>
-          <div class="skill-tags"><span>MongoDB</span><span>SQLite</span></div>
-        </div>
-        <div class="skill-category">
-          <h4><i class="fas fa-tools"></i> Tools</h4>
-          <div class="skill-tags"><span>Git</span><span>GitHub</span><span>VS Code</span></div>
-        </div>
-        <div class="skill-category">
-          <h4><i class="fas fa-desktop"></i> OS</h4>
-          <div class="skill-tags"><span>Kali Linux (Basic)</span></div>
-        </div>
-        <div class="skill-category">
-          <h4><i class="fas fa-language"></i> Languages</h4>
-          <div class="skill-tags"><span>English</span><span>Hindi</span><span>Gujarati</span></div>
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="section">
+      <div class="container narrow reveal">
+        <h2>About me</h2>
+        <p class="lead">Motivated Computer Engineering student seeking a Full Stack Web Development opportunity to apply skills in frontend and backend development, database management, and web technologies. Eager to build scalable, user-focused applications while continuously improving technical and problem-solving skills.</p>
+        <p class="langs"><i class="fa-solid fa-language" aria-hidden="true"></i> Languages: English, Hindi, Gujarati</p>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" class="section section--alt">
+      <div class="container">
+        <h2 class="reveal">Skills</h2>
+        <div class="grid grid--3">
+          <article class="card reveal">
+            <h3><i class="fa-solid fa-globe" aria-hidden="true"></i> Web technologies</h3>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Framework</h3>
+            <ul class="tags"><li>Django</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3><i class="fa-solid fa-database" aria-hidden="true"></i> Databases</h3>
+            <ul class="tags"><li>MongoDB</li><li>SQLite</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3><i class="fa-brands fa-python" aria-hidden="true"></i> Programming</h3>
+            <ul class="tags"><li>Python (Basic)</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3><i class="fa-brands fa-linux" aria-hidden="true"></i> Operating system</h3>
+            <ul class="tags"><li>Kali Linux (Basic)</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Tools</h3>
+            <ul class="tags"><li>Git</li><li>GitHub</li><li>VS Code</li></ul>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SERVICES -->
-  <section class="section section-alt" id="services">
-    <div class="container">
-      <h2 class="section-title">My <span>Services</span></h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <i class="fas fa-laptop-code"></i>
-          <h3>Web Development</h3>
-          <p>Building responsive, functional web applications using HTML, CSS, JavaScript, and Django for both frontend and backend needs.</p>
-        </div>
-        <div class="service-card">
-          <i class="fas fa-database"></i>
-          <h3>Database Management</h3>
-          <p>Designing and managing databases using SQLite and MongoDB, implementing efficient data storage and retrieval solutions.</p>
-        </div>
-        <div class="service-card">
-          <i class="fas fa-shield-alt"></i>
-          <h3>Security Awareness</h3>
-          <p>Basic cybersecurity analysis including phishing URL detection and vulnerability assessment using tools like Nmap and Kali Linux.</p>
-        </div>
-        <div class="service-card">
-          <i class="fas fa-paint-brush"></i>
-          <h3>UI Design</h3>
-          <p>Creating clean, user-friendly interfaces focused on usability and a positive user experience across devices.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section class="section" id="projects">
-    <div class="container">
-      <h2 class="section-title">My <span>Projects</span></h2>
-      <div class="projects-grid">
-
-        <div class="project-card">
-          <div class="project-header">
-            <i class="fas fa-graduation-cap project-icon"></i>
-            <div class="project-links">
-             <a href="https://github.com/JayanOdedra/Student-Management-System.git" target="_blank" rel="noopener noreferrer" title="View on GitHub"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <a href="https://github.com/JayanOdedra/Student-Management-System" target="_blank" rel="noopener noreferrer"><h3>Student Management System</h3></a>
-          <p>Developed a web-based Student Management System using Django. Implemented CRUD operations for student records and integrated SQLite for data storage and retrieval. Designed a simple and user-friendly interface.</p>
-          <div class="project-tags">
-            <span>Python</span><span>Django</span><span>SQLite</span><span>HTML</span><span>CSS</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <i class="fas fa-shield-virus project-icon"></i>
-            <div class="project-links">
-              <a href="https://github.com/JayanOdedra/Phishing-url-system.git" target="_blank" rel="noopener noreferrer" title="View on GitHub"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <a href="https://github.com/JayanOdedra/Phishing-url-system" target="_blank" rel="noopener noreferrer"><h3>Phishing URL System</h3></a>
-          <p>Developed a Flask-based application that analyses URL-based security features to distinguish legitimate URLs from potentially malicious ones. Created a responsive interface for submitting URLs and viewing classification results.</p>
-          <div class="project-tags">
-            <span>Python</span><span>Flask</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <i class="fas fa-person-chalkboard project-icon"></i>
-            <div class="project-links">
-              <a href="https://github.com/JayanOdedra/CampusPro_Academic-Management-System.git" target="_blank" rel="noopener noreferrer" title="View on GitHub"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <a href="https://github.com/JayanOdedra/CampusPro_Academic-Management-System" target="_blank" rel="noopener noreferrer"><h3>CampusPro Academic System</h3></a>
-          <p>Developed a role-based academic management system using Django with separate Admin, Teacher, and Student dashboards. Implemented attendance tracking, marks management, CSV exports, printable report cards, and security features including CSRF protection, login lockout, and audit logging.</p>
-          <div class="project-tags">
-            <span>Python</span><span>MongoDB</span><span>SQLite</span><span>Bootstrap</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- INTERNSHIP -->
-  <section class="section section-alt" id="internship">
-    <div class="container">
-      <h2 class="section-title">My <span>Experience</span></h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3>Junior Cyber Security Essential</h3>
-              <span class="timeline-date">1 July 2026 – 15 July 2026</span>
-            </div>
-            <h4 class="timeline-company"><i class="fas fa-building"></i> Cisco Networking Intern</h4>
-            <ul class="timeline-list">
-              <li>Assisted with vulnerability assessment and security analysis.</li>
-              <li>Used Nmap and Kali Linux during introductory security work.</li>
-              <li>Analysed phishing URLs and suspicious security indicators.</li>
-              <li>Gained exposure to network security and threat detection.</li>
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience" class="section">
+      <div class="container narrow">
+        <h2 class="reveal">Experience</h2>
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <h3>Cisco Networking Intern, Cyber Security Essentials</h3>
+            <p class="meta">01 July 2026 to 15 July 2026</p>
+            <ul>
+              <li>Assisted in vulnerability assessment, security analysis and threat identification using Nmap and Kali Linux.</li>
+              <li>Analyzed phishing URLs and suspicious security indicators to identify potential threats.</li>
+              <li>Gained practical exposure to network security, threat detection and incident analysis.</li>
+              <li>Applied cybersecurity best practices during security analysis and testing.</li>
             </ul>
-          </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" class="section section--alt">
+      <div class="container">
+        <h2 class="reveal">Projects</h2>
+        <div class="grid grid--2">
+          <article class="card project reveal">
+            <h3>Student Management System</h3>
+            <ul class="badges" aria-label="Tech stack"><li>Python</li><li>Django</li><li>SQLite</li><li>HTML</li><li>CSS</li><li>Bootstrap</li></ul>
+            <ul class="bullets">
+              <li>Web-based system built with Django.</li>
+              <li>CRUD operations for student records.</li>
+              <li>SQLite integration for data storage and retrieval.</li>
+              <li>Simple, user-friendly interface using HTML, CSS and Bootstrap.</li>
+            </ul>
+            <!-- TODO: replace with the exact repository URL -->
+            <a class="btn btn--ghost btn--sm" href="https://github.com/JayanOdedra" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View on GitHub</a>
+          </article>
+          <article class="card project reveal">
+            <h3>Phishing URL System</h3>
+            <ul class="badges" aria-label="Tech stack"><li>Python</li><li>Flask</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            <ul class="bullets">
+              <li>Flask backend that processes URL inputs and gives automated classification results.</li>
+              <li>Extracts and analyzes URL-based security features to separate legitimate URLs from malicious ones.</li>
+              <li>Responsive web interface to submit URLs and view detection results.</li>
+            </ul>
+            <!-- TODO: replace with the exact repository URL -->
+            <a class="btn btn--ghost btn--sm" href="https://github.com/JayanOdedra" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View on GitHub</a>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EDUCATION -->
-  <section class="section" id="education">
-    <div class="container">
-      <h2 class="section-title">My <span>Education</span></h2>
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3>Bachelor of Engineering – Computer Engineering</h3>
-              <span class="timeline-date">2023 – 2027</span>
-            </div>
-            <h4 class="timeline-company"><i class="fas fa-university"></i> Government Engineering College, Palanpur · GTU</h4>
-            <p class="timeline-detail">CGPA: <strong>6.57</strong></p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3>Higher Secondary Certificate (HSC)</h3>
-              <span class="timeline-date">2023</span>
-            </div>
-            <h4 class="timeline-company"><i class="fas fa-school"></i> Rajshakha Higher Secondary School · Gujarat Board</h4>
-            <p class="timeline-detail">Percentage: <strong>70.72%</strong></p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3>Secondary School Certificate (SSC)</h3>
-              <span class="timeline-date">2021</span>
-            </div>
-            <h4 class="timeline-company"><i class="fas fa-school"></i> Rajshakha Higher Secondary School · Gujarat Board</h4>
-            <p class="timeline-detail">Percentage: <strong>76.33%</strong></p>
-          </div>
-        </div>
-
+    <!-- ===== EDUCATION ===== -->
+    <section id="education" class="section">
+      <div class="container narrow">
+        <h2 class="reveal">Education</h2>
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <h3>B.E. Computer Engineering</h3>
+            <p class="meta">Government Engineering College Palanpur, 2023-2027</p>
+            <p>CGPA: 6.57</p>
+          </li>
+          <li class="timeline__item reveal">
+            <h3>HSC</h3>
+            <p class="meta">Rajshakha Higher Secondary School, Gujarat Board, 2023</p>
+            <p>70.72%</p>
+          </li>
+          <li class="timeline__item reveal">
+            <h3>SSC</h3>
+            <p class="meta">Rajshakha Higher Secondary School, Gujarat Board, 2021</p>
+            <p>76.33%</p>
+          </li>
+        </ol>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- RESUME -->
-  <section class="section section-alt" id="resume">
-    <div class="container">
-      <h2 class="section-title">My <span>Resume</span></h2>
-      <p class="resume-desc">Download or view my resume to learn more about my skills, education, and experience.</p>
-      <div class="resume-buttons">
-        <a href="assets/Jayan_Odedra_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="fas fa-eye"></i> View Resume</a>
-        <a href="assets/Jayan_Odedra_Resume.pdf" download="Jayan_Odedra_Resume.pdf" class="btn btn-outline"><i class="fas fa-download"></i> Download PDF</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section" id="contact">
-    <div class="container">
-      <h2 class="section-title">Contact <span>Me</span></h2>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h3>Get In Touch</h3>
-          <p>Feel free to reach out for collaboration, opportunities, or just a friendly chat about technology.</p>
-          <div class="contact-items">
-            <a href="mailto:odedrajayan@gmail.com" class="contact-item">
-              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-              <div><span class="contact-label">Email</span><span class="contact-value">odedrajayan@gmail.com</span></div>
-            </a>
-            <a href="tel:+919998869392" class="contact-item">
-              <div class="contact-icon"><i class="fas fa-phone"></i></div>
-              <div><span class="contact-label">Phone</span><span class="contact-value">+91-9998869392</span></div>
-            </a>
-            <a href="https://github.com/JayanOdedra" target="_blank" rel="noopener noreferrer" class="contact-item">
-              <div class="contact-icon"><i class="fab fa-github"></i></div>
-              <div><span class="contact-label">GitHub</span><span class="contact-value">JayanOdedra</span></div>
-            </a>
-            <a href="https://www.linkedin.com/in/jayan-odedra/" target="_blank" rel="noopener noreferrer" class="contact-item">
-              <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
-              <div><span class="contact-label">LinkedIn</span><span class="contact-value">jayan-odedra</span></div>
-            </a>
-            <div class="contact-item no-link">
-              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div><span class="contact-label">Location</span><span class="contact-value">India</span></div>
-            </div>
-          </div>
+    <!-- ===== RESUME ===== -->
+    <section id="resume" class="section section--alt">
+      <div class="container narrow center reveal">
+        <h2>Resume</h2>
+        <p class="lead">Read it here or save a copy.</p>
+        <div class="btn-row btn-row--center">
+          <button class="btn btn--primary" data-open-resume><i class="fa-regular fa-eye"></i> View Resume</button>
+          <a class="btn btn--ghost" href="assets/Jayan_Odedra_Resume.pdf" download="Jayan_Odedra_Resume.pdf"><i class="fa-solid fa-download"></i> Download Resume</a>
         </div>
-        <div class="contact-form-wrap">
-          <h3>Send a Message</h3>
-          <p class="form-note"><i class="fas fa-info-circle"></i> This form is for you to contact me. Send me the email messege and ask whatever you want from me. Feel free to ask a questions...!!!</p>
-          <form class="contact-form" action="https://formspree.io/f/mljgzyno" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input type="email" name="email" placeholder="Your Email" required />
-            <input type="text" name="subject" placeholder="Subject" />
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit" class="btn btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="reveal">Contact</h2>
+        <div class="contact">
+          <ul class="contact__list reveal">
+            <li><a href="mailto:odedrajayan@gmail.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> odedrajayan@gmail.com</a></li>
+            <li><a href="tel:+919998869392"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91-9998869392</a></li>
+            <li><a href="https://linkedin.com/in/jayan-odedra" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> linkedin.com/in/jayan-odedra</a></li>
+            <li><a href="https://github.com/JayanOdedra" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> github.com/JayanOdedra</a></li>
+          </ul>
+
+          <!-- Replace YOUR_FORM_ID with your Formspree form ID (see script.js) -->
+          <form class="card form reveal" id="contactForm" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+              <p class="err" id="nameErr" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+              <p class="err" id="emailErr" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+              <p class="err" id="messageErr" role="alert"></p>
+            </div>
+            <button class="btn btn--primary" type="submit">Send message</button>
+            <p class="form__status" id="formStatus" role="status"></p>
           </form>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="container">
-      <p class="footer-logo"><a href="#home" class="nav-logo">Jayan</a><span>.</span></p>
-      <p class="footer-text">© 2025 Jayan Odedra. All rights reserved.</p>
-      <div class="footer-socials">
-        <a href="https://github.com/JayanOdedra" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/jayan-odedra/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:odedrajayan@gmail.com"><i class="fas fa-envelope"></i></a>
-      </div>
+    <div class="container footer__inner">
+      <p>&copy; <span id="year"></span> Jayan Odedra. All rights reserved.</p>
+      <ul class="social">
+        <li><a href="https://github.com/JayanOdedra" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a></li>
+        <li><a href="https://linkedin.com/in/jayan-odedra" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
+        <li><a href="mailto:odedrajayan@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a></li>
+        <li><a href="tel:+919998869392" aria-label="Phone"><i class="fa-solid fa-phone"></i></a></li>
+      </ul>
     </div>
   </footer>
 
-  <a href="#home" class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
+  <button class="to-top" id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- ===== RESUME MODAL ===== -->
+  <div class="modal" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal__box">
+      <div class="modal__bar">
+        <h2 id="modalTitle">Resume</h2>
+        <a href="assets/Jayan_Odedra_Resume.pdf" target="_blank" rel="noopener">Open in new tab</a>
+        <button class="icon-btn" id="modalClose" aria-label="Close resume"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <iframe id="resumeFrame" title="Jayan Odedra resume (PDF)"></iframe>
+      <p class="modal__note">Can't see the preview? <a href="assets/Jayan_Odedra_Resume.pdf" target="_blank" rel="noopener">Open in new tab</a>.</p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
