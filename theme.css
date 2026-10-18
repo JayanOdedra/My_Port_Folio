@@ -1,0 +1,80 @@
+/* =========================================================
+   theme.css  -  load this AFTER style.css
+
+   DARK MODE  = your original style.css (not changed at all)
+   LIGHT MODE = everything below (text, header, boxes, footer, buttons)
+   Change light-mode colors only in the first block.
+   ========================================================= */
+
+/* ---------- LIGHT MODE COLORS ---------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg:        #F7F9FC;   /* page background */
+  --bg-alt:    #EDF2F9;   /* alternate sections, footer, mobile menu */
+  --card:      #FFFFFF;   /* boxes / cards / inputs */
+  --border:    #DCE3F0;   /* lines around boxes */
+  --cyan:      #0077B6;   /* main accent: links, buttons, icons */
+  --cyan-dark: #005F92;   /* button hover */
+  --white:     #0F1B33;   /* MAIN TEXT + headings (dark navy) */
+  --grey:      #55627F;   /* paragraph text */
+  --accent-rgb: 0, 119, 182;
+  --on-accent: #FFFFFF;   /* text on blue buttons */
+  --nav-bg:    rgba(247, 249, 252, 0.95);
+  --shadow:    0 10px 30px rgba(15, 27, 51, 0.08);
+}
+
+/* ---------- HEADER (navbar) ---------- */
+:root[data-theme="light"] .navbar.scrolled {
+  background: var(--nav-bg);
+  box-shadow: 0 2px 20px rgba(15, 27, 51, 0.08);
+}
+
+/* ---------- BUTTONS and text on blue ---------- */
+:root[data-theme="light"] .btn-primary,
+:root[data-theme="light"] .btn-outline:hover,
+:root[data-theme="light"] .hero-socials a:hover,
+:root[data-theme="light"] .back-to-top { color: var(--on-accent); }
+
+/* ---------- TAGS, DATES, ICONS, NOTES (blue tint) ---------- */
+:root[data-theme="light"] .skill-tags span   { background: rgba(var(--accent-rgb), .08); border-color: rgba(var(--accent-rgb), .28); }
+:root[data-theme="light"] .project-tags span { background: rgba(var(--accent-rgb), .08); border-color: rgba(var(--accent-rgb), .25); }
+:root[data-theme="light"] .timeline-date     { background: rgba(var(--accent-rgb), .08); border-color: rgba(var(--accent-rgb), .25); }
+:root[data-theme="light"] .contact-icon      { background: rgba(var(--accent-rgb), .08); border-color: rgba(var(--accent-rgb), .28); }
+:root[data-theme="light"] .form-note         { background: rgba(var(--accent-rgb), .06); border-color: rgba(var(--accent-rgb), .20); }
+:root[data-theme="light"] .resume-note code  { background: rgba(var(--accent-rgb), .08); }
+
+/* ---------- BOXES: soft shadow so they stand out on light ---------- */
+:root[data-theme="light"] .service-card,
+:root[data-theme="light"] .project-card,
+:root[data-theme="light"] .skill-category,
+:root[data-theme="light"] .timeline-content,
+:root[data-theme="light"] .contact-item { box-shadow: var(--shadow); }
+
+/* ---------- HERO PHOTO and FOOTER ---------- */
+:root[data-theme="light"] .img-wrapper { box-shadow: 0 0 0 10px rgba(var(--accent-rgb), .10); }
+:root[data-theme="light"] .footer { box-shadow: 0 -1px 0 var(--border); }
+:root[data-theme="light"] ::selection { background: var(--cyan); color: #fff; }
+
+/* ---------- THEME TOGGLE BUTTON (works in both modes) ---------- */
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card); color: var(--cyan);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; cursor: pointer; flex-shrink: 0;
+  transition: border-color .3s, transform .3s;
+}
+.theme-toggle:hover { border-color: var(--cyan); transform: rotate(15deg); }
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: inline-block; }
+:root[data-theme="light"] .theme-toggle .icon-sun  { display: none; }
+
+@media (max-width: 768px) {
+  .theme-toggle { margin-left: auto; margin-right: .75rem; }
+}
+
+/* Smooth color change only while switching (added by theme.js) */
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease !important;
+}
