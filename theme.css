@@ -1,36 +1,36 @@
 /* =========================================================
    theme.css  -  load this AFTER style.css
- 
+
    DARK MODE  = your original style.css (not changed at all)
    LIGHT MODE = warm ivory + GOLD theme (everything below)
    Change light-mode colors only in the first block.
    ========================================================= */
- 
+
 /* ---------- LIGHT MODE COLORS (GOLD) ---------- */
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg:        #FFFDF7;   /* page background (soft ivory) */
-  --bg-alt:    #FFF6DC;   /* alternate sections, footer (light gold) */
-  --card:      #FFFFFF;   /* boxes / cards / inputs */
-  --border:    #F0E3B8;   /* golden lines around boxes */
-  --cyan:      #A16207;   /* GOLD for text, icons, links, highlighted words */
-  --cyan-dark: #854D0E;   /* darker gold */
+  --bg:        #EDE5D0;   /* page background (soft sand, easy on eyes) */
+  --bg-alt:    #E4DAC0;   /* alternate sections, footer */
+  --card:      #F8F3E4;   /* boxes / cards / inputs (soft, not pure white) */
+  --border:    #D6C8A0;   /* golden lines around boxes */
+  --cyan:      #8A5300;   /* GOLD for text, icons, links, highlighted words */
+  --cyan-dark: #6F4200;   /* darker gold */
   --gold:      #F5B301;   /* bright gold for button / badge backgrounds */
   --gold-dark: #E0A100;   /* bright gold on hover */
   --white:     #1C1917;   /* MAIN TEXT + headings (warm near-black) */
-  --grey:      #57534E;   /* paragraph text (warm grey) */
+  --grey:      #4A443C;   /* paragraph text (warm dark grey) */
   --accent-rgb: 245, 179, 1;
   --on-accent: #1F1600;   /* dark text on gold buttons */
-  --nav-bg:    rgba(255, 253, 247, 0.95);
-  --shadow:    0 8px 24px rgba(120, 80, 0, 0.09);
+  --nav-bg:    rgba(237, 229, 208, 0.95);
+  --shadow:    0 8px 24px rgba(90, 60, 0, 0.12);
 }
- 
+
 /* ---------- HEADER (navbar) ---------- */
 :root[data-theme="light"] .navbar.scrolled {
   background: var(--nav-bg);
-  box-shadow: 0 1px 0 var(--border), 0 4px 16px rgba(120, 80, 0, 0.07);
+  box-shadow: 0 1px 0 var(--border), 0 4px 16px rgba(90, 60, 0, 0.10);
 }
- 
+
 /* ---------- BUTTONS (bright gold with dark text) ---------- */
 :root[data-theme="light"] .btn-primary {
   background: var(--gold); border-color: var(--gold); color: var(--on-accent);
@@ -43,7 +43,7 @@
   background: var(--gold); border-color: var(--gold); color: var(--on-accent);
 }
 :root[data-theme="light"] .back-to-top { background: var(--gold); color: var(--on-accent); }
- 
+
 /* ---------- TAGS, DATES, ICONS (soft gold tint) ---------- */
 :root[data-theme="light"] .skill-tags span {
   background: rgba(var(--accent-rgb), .14); border-color: rgba(var(--accent-rgb), .5); color: var(--white);
@@ -58,20 +58,20 @@
   background: rgba(var(--accent-rgb), .16); border-color: rgba(var(--accent-rgb), .5);
 }
 :root[data-theme="light"] .resume-note code { background: var(--bg-alt); }
- 
+
 /* ---------- FORM NOTE ---------- */
 :root[data-theme="light"] .form-note {
   background: var(--bg-alt); border-color: var(--border); color: var(--grey);
 }
 :root[data-theme="light"] .form-note i { color: var(--cyan); }
- 
+
 /* ---------- BOXES: warm soft shadow ---------- */
 :root[data-theme="light"] .service-card,
 :root[data-theme="light"] .project-card,
 :root[data-theme="light"] .skill-category,
 :root[data-theme="light"] .timeline-content,
 :root[data-theme="light"] .contact-item { box-shadow: var(--shadow); }
- 
+
 /* ---------- HERO PHOTO, FOOTER, SELECTION ---------- */
 :root[data-theme="light"] .img-wrapper {
   border-color: var(--gold);
@@ -79,7 +79,7 @@
 }
 :root[data-theme="light"] .footer { box-shadow: 0 -1px 0 var(--border); }
 :root[data-theme="light"] ::selection { background: var(--gold); color: var(--on-accent); }
- 
+
 /* ---------- THEME TOGGLE BUTTON (works in both modes) ---------- */
 .theme-toggle {
   width: 40px; height: 40px; border-radius: 50%;
@@ -92,15 +92,14 @@
 .theme-toggle .icon-moon { display: none; }
 :root[data-theme="light"] .theme-toggle .icon-moon { display: inline-block; }
 :root[data-theme="light"] .theme-toggle .icon-sun  { display: none; }
- 
+
 @media (max-width: 768px) {
   .theme-toggle { margin-left: auto; margin-right: .75rem; }
 }
- 
+
 /* Smooth color change only while switching (added by theme.js) */
 html.theme-transition *,
 html.theme-transition *::before,
 html.theme-transition *::after {
   transition: background-color .3s ease, color .3s ease, border-color .3s ease !important;
 }
- 
