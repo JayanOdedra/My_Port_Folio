@@ -13,9 +13,9 @@ const CONFIG = {
   },
   // level: 'hands' = Hands-on, 'found' = Foundations
   skills: [
-    ['HTML','Web technologies','hands'],['CSS','Web technologies','hands'],['JavaScript','Web technologies','hands'],['Django','Framework','hands'],
-    ['Flask','Framework','found'],['SQLite','Database','hands'],['MongoDB','Database','found'],['Python(basics)','Programming','found'],
-    ['Kali Linux(Basics)','Operating system','found'],['Git','Tool','hands'],['GitHub','Tool','hands'],['VS Code','Tool','hands']
+    ['HTML, CSS, JavaScript','Web technologies','hands'],['Django, Flask','Framework','hands'],
+    ['SQLite, MongoDB','Database','hands'],['Python(basics)','Programming','found'],
+    ['Kali Linux(Basics)','Operating system','found'],['Git, GitHub, VS Code','Tool','hands']
   ]
 };
 
