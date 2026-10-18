@@ -9,7 +9,7 @@
 /* ---------- LIGHT MODE COLORS (GOLD) ---------- */
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg:        #EDE5D0;   /* page background (soft sand, easy on eyes) */
+  --bg:        #f3f1ec;   /* page background (soft sand, easy on eyes) */
   --bg-alt:    #E4DAC0;   /* alternate sections, footer */
   --card:      #F8F3E4;   /* boxes / cards / inputs (soft, not pure white) */
   --border:    #D6C8A0;   /* golden lines around boxes */
