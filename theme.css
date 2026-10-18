@@ -75,7 +75,6 @@
 /* ---------- HERO PHOTO, FOOTER, SELECTION ---------- */
 :root[data-theme="light"] .img-wrapper {
   border-color: var(--gold);
-  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), .22);
 }
 :root[data-theme="light"] .footer { box-shadow: 0 -1px 0 var(--border); }
 :root[data-theme="light"] ::selection { background: var(--gold); color: var(--on-accent); }
