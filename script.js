@@ -110,25 +110,3 @@ profileImgs.forEach(img => {
   });
 });
 
-const themeToggle = document.getElementById("theme-toggle");
-
-// Load saved theme
-if (localStorage.getItem("theme") === "light") {
-    document.body.classList.add("light-mode");
-    themeToggle.textContent = "☀️";
-    themeToggle.setAttribute("aria-label", "Switch to dark mode");
-}
-
-themeToggle.addEventListener("click", function () {
-    document.body.classList.toggle("light-mode");
-
-    const isLightMode = document.body.classList.contains("light-mode");
-
-    themeToggle.textContent = isLightMode ? "☀️" : "🌙";
-    themeToggle.setAttribute(
-        "aria-label",
-        isLightMode ? "Switch to dark mode" : "Switch to light mode"
-    );
-
-    localStorage.setItem("theme", isLightMode ? "light" : "dark");
-});
