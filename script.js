@@ -6,6 +6,8 @@ const CONFIG = {
     github: 'https://github.com/JayanOdedra',
     email: 'odedrajayan@gmail.com',
     resume: 'assets/Jayan_Odedra_Resume.pdf',
+    campusRepo: 'https://github.com/JayanOdedra/CampusPro_Academic-Management-System',   // paste the repository URL
+    campusDemo: '',   // optional: add only if a live demo exists
     studentRepo: 'https://github.com/JayanOdedra/Student-Management-System',   // paste the repository URL
     studentDemo: '',   // optional: add only if a live demo exists
     phishingRepo: 'https://github.com/JayanOdedra/Phishing-url-system',  // paste the repository URL
@@ -69,7 +71,7 @@ $('#year').textContent = new Date().getFullYear();
 let heroStarted=false;
 function startHero(){
   if(heroStarted)return;heroStarted=true;
-  const words=['Full Stack Web Developer','Django Developer','Cyber Security Enthusiast'];
+  const words=['Full Stack Web Developer','Django Developer'];
   const out=$('#typed');
   if(reduced){out.textContent=words[0]}else{
     (async()=>{let w=0;for(;;){

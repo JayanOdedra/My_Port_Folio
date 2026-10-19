@@ -33,9 +33,13 @@
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
   <nav class="menu" id="menu" aria-label="Main">
     <span class="indicator" id="indicator" aria-hidden="true"></span>
-    <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a>
-    <a href="#projects">Projects</a><a href="#experience">Experience</a>
-    <a href="#education">Education</a><a href="#contact">Contact</a>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
   </nav>
 </header>
 
@@ -45,7 +49,7 @@
   <div class="hero-main">
   <div class="hero-text">
     <p class="status"><span class="dot"></span>Open to Full Stack opportunities</p>
-    <p class="hello">Hi, I'm Jayan Odedra</p>
+    <p class="hello" style="font-size: 26px;">Hi, I'm Jayan Odedra</p>
     <h1 class="glitch" data-text="Full Stack Web Developer">Full Stack Web Developer</h1>
     <p class="typer"><span class="prompt">&gt;</span> <span id="typed"></span><span class="cursor" aria-hidden="true"></span></p>
     <p class="lead">Computer Engineering student building scalable, user-focused web applications. I work across frontend, backend and databases, and keep improving my technical and problem-solving skills.</p>
@@ -64,7 +68,6 @@
     <div class="photo-ring">
       <div class="photo-frame">
         <img id="profilePhoto" src="images/profile.jpeg" alt="Jayan Odedra - Full Stack Web Developer" width="340" height="340" decoding="async">
-        <figcaption class="photo-ph">Add your photo<br><small>assets/profile.jpg</small></figcaption>
       </div>
     </div>
   </figure>
@@ -107,6 +110,25 @@
 <section id="projects" class="sec">
   <h2 class="reveal">Projects</h2>
   <div class="cards two">
+
+    <article class="card glass reveal spot">
+      <span class="tag-type dev-tag">Web development</span>
+      <div class="shot"><img src="assets/campus pro.jpg" alt="campus pro project screenshot" decoding="async"></div>
+      <h3>Campus Pro Academic Management System</h3>
+      <p>Built a role-based academic management system for Admin, Teacher and Student with approval-based registration and role-based access control. Implemented attendance and marks modules with Chart.js dashboards, CSV exports and a printable report card. Added security features: login lockout, CSRF protection, audit logging in MongoDB.</p>
+      <ul class="badges"><li>Python</li><li>Django</li><li>SQLite</li><li>MongoDB</li><li>Bootstrap</li></ul>
+      <div class="card-actions"><a class="btn btn-ghost sm" data-link="campusRepo" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost sm" data-link="campusDemo" target="_blank" rel="noopener" data-optional>Live demo</a></div>
+    </article>
+    
+    <article class="card glass reveal spot">
+      <span class="tag-type sec-tag">Security</span>
+      <div class="shot"><img src="assets/phishing url.jpg" alt="phishing url project screenshot" decoding="async"></div>
+      <h3>Phishing URL Detection</h3>
+      <p>A Flask backend that processes URL inputs and gives automated classification results. It extracts URL-based security features to tell legitimate URLs from malicious ones, with a responsive interface to submit URLs and view the results.</p>
+      <ul class="badges"><li>Python</li><li>Flask</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+      <div class="card-actions"><a class="btn btn-ghost sm" data-link="phishingRepo" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost sm" data-link="phishingDemo" target="_blank" rel="noopener" data-optional>Live demo</a></div>
+    </article>
+    
     <article class="card glass reveal spot">
       <span class="tag-type dev-tag">Web development</span>
       <div class="shot"><img src="assets/student system.jpg" alt="student management system project screenshot" decoding="async"></div>
@@ -115,14 +137,7 @@
       <ul class="badges"><li>Python</li><li>Django</li><li>SQLite</li><li>HTML</li><li>CSS</li><li>Bootstrap</li></ul>
       <div class="card-actions"><a class="btn btn-ghost sm" data-link="studentRepo" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost sm" data-link="studentDemo" target="_blank" rel="noopener" data-optional>Live demo</a></div>
     </article>
-    <article class="card glass reveal spot">
-      <span class="tag-type sec-tag">Security</span>
-      <div class="shot"><img src="assets/phishing url.jpg" alt="phishing url project screenshot" decoding="async"><span>Screenshot placeholder<br><small>assets/phishing-url.png</small></span></div>
-      <h3>Phishing URL System</h3>
-      <p>A Flask backend that processes URL inputs and gives automated classification results. It extracts URL-based security features to tell legitimate URLs from malicious ones, with a responsive interface to submit URLs and view the results.</p>
-      <ul class="badges"><li>Python</li><li>Flask</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-      <div class="card-actions"><a class="btn btn-ghost sm" data-link="phishingRepo" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost sm" data-link="phishingDemo" target="_blank" rel="noopener" data-optional>Live demo</a></div>
-    </article>
+
   </div>
 </section>
 
