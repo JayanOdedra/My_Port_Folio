@@ -153,7 +153,7 @@ addEventListener('resize',()=>{if(innerWidth>900)setMenu(false)});
   const dpr=Math.min(devicePixelRatio||1,2);
   function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
     const n=Math.min(48,Math.floor(W*H/32000));
-    P=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:-.1-Math.random()*.3,r:1+Math.random()*1.6,c:Math.random()>.5?'0,255,157':'34,211,238'}))}
+    P=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:-.1-Math.random()*.3,r:1+Math.random()*1.6,c:Math.random()>.5?'167,139,250':'240,171,252'}))}
   function draw(){
     ctx.clearRect(0,0,W,H);
     for(const p of P){
